@@ -1,0 +1,23 @@
+{
+  "name": "nvodcmp",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/geekarist/vod-cmp"
+  },
+  "author": "",
+  "license": "BSD-2-Clause",
+  "bugs": {
+    "url": "https://github.com/geekarist/vod-cmp/issues"
+  },
+  "homepage": "https://github.com/geekarist/vod-cmp",
+  "dependencies": {
+    "cheerio": "~0.12.4",
+    "request": "~2.29.0"
+  }
+}
