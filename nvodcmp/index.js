@@ -19,12 +19,17 @@ function fetchAndLogMoviePrice(searchTitle, store) {
     var key = "AIzaSyBWMeWVWdEEYvDBvQmM4xCXV-1UcGr4yN8";
     var searchUrl = "https://www.googleapis.com/customsearch/v1?q=" + escape(q) + "&cx=" + escape(cx) + "&key=" + key + "&siteSearch=" + store.url;
     request(searchUrl, function(error, response, body) {
-        var movieUrl = JSON.parse(body).items[0].link;
+        var result = JSON.parse(body);
+        if (result.error) {
+            console.log('Error while querying [' + store.name + ']: ' + JSON.stringify(result.error.errors));
+            return;
+        }
+        var movieUrl = result.items[0].link;
         request({url:movieUrl, headers:{'User-Agent':USER_AGENT}}, function(error, response, body) {
             var $ = cheerio.load(body);
-            var rentalInfo = $(store.priceSelector).text() || "-1";
+            var rentalInfo = $(store.priceSelector).text().trim() || "Price not found";
             var rentalPrice = parseFloat(rentalInfo.replace(',', '.'));
-            var movieTitle = $(store.titleSelector).text().trim() || 'Unknown title';
+            var movieTitle = $(store.titleSelector).text().trim() || 'Title not found';
             console.log('"' + movieTitle + '": ' + rentalPrice + ' € at ' + store.name);
         })
     });
