@@ -24,13 +24,27 @@ function fetchAndLogMoviePrice(searchTitle, store) {
             console.log('Error while querying [' + store.name + ']: ' + JSON.stringify(result.error.errors));
             return;
         }
+        if (!result.items || result.items.length == 0) {
+            console.log('"' + searchTitle + '" not found on ' + store.name);
+            return;
+        }
         var movieUrl = result.items[0].link;
         request({url:movieUrl, headers:{'User-Agent':USER_AGENT}}, function(error, response, body) {
             var $ = cheerio.load(body);
-            var rentalInfo = $(store.priceSelector).text().trim() || "Price not found";
+            var rentalInfo = $(store.priceSelector).text().trim() || "";
             var rentalPrice = parseFloat(rentalInfo.replace(',', '.'));
-            var movieTitle = $(store.titleSelector).text().trim() || 'Title not found';
-            console.log('"' + movieTitle + '": ' + rentalPrice + ' € at ' + store.name);
+            var movieTitle = $(store.titleSelector).text().trim() || '';
+            var foundInformation;
+            if (rentalInfo && movieTitle) {
+                foundInformation = 'Found as "' + movieTitle + '" for ' + rentalPrice + ' € at ' + store.name;
+            } else if (!rentalPrice) {
+                foundInformation = 'Found as "' + movieTitle + '", price not found at ' + store.name;
+            } else if (!movieTitle) {
+                foundInformation = 'Title not found, for ' + rentalPrice + ' € at ' + store.name;
+            } else {
+                foundInformation = 'No information found at ' + store.name;
+            }
+            console.log(foundInformation + ' (see ' + movieUrl + ')');
         })
     });
 }
