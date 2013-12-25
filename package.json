@@ -2,12 +2,13 @@
   "name": "metavideoclub",
   "version": "0.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "bin": {
-    "metavideoclub": "index.js"
+    "mvc": "cli.js",
+    "mvc-server": "server.js"
   },
   "scripts": {
-    "test": "mocha test.js"
+    "test": "mocha *test.js"
   },
   "repository": {
     "type": "git",
