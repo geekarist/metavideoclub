@@ -1,24 +1,24 @@
 {
-  "name": "nvodcmp",
+  "name": "metavideoclub",
   "version": "0.0.0",
   "description": "",
   "main": "index.js",
   "bin": {
-    "nvodcmp": "index.js"
+    "metavideoclub": "index.js"
   },
   "scripts": {
     "test": "mocha test.js"
   },
   "repository": {
     "type": "git",
-    "url": "http://github.com/geekarist/vod-cmp"
+    "url": "http://github.com/geekarist/metavideoclub"
   },
   "author": "",
   "license": "BSD-2-Clause",
   "bugs": {
-    "url": "https://github.com/geekarist/vod-cmp/issues"
+    "url": "https://github.com/geekarist/metavideoclub/issues"
   },
-  "homepage": "https://github.com/geekarist/vod-cmp",
+  "homepage": "https://github.com/geekarist/metavideoclub",
   "dependencies": {
     "cheerio": "~0.12.4",
     "request": "~2.29.0"
