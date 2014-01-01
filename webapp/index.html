@@ -1,0 +1,33 @@
+<html ng-app="metavideoclubApp">
+<head>
+    <link rel="stylesheet" href="app/components/bootstrap/dist/css/bootstrap.css" />
+    <script type="text/javascript" src="app/components/jquery/jquery.js"></script>
+    <script type="text/javascript" src="app/components/angular/angular.js"></script>
+
+    <script type="text/javascript">
+    var app = angular.module('metavideoclubApp', []);
+    app.controller('metavideoclubCtrl', function($scope) {
+        $scope.myData = [
+        {title: "Man of steel", url: "http://www.videofutur.fr/film/man-of-steel", store: 'Video Futur'},
+        {title: "Man of steel", url: "http://www.virginmega.fr/video/film/man-of-steel-119159851,normal,page1.htm", store: 'Virgin Mega'},
+        {title: "Man of Steel", url: "http://mytf1vod.tf1.fr/nouveaute/media-19460-Man_of_Steel.html?PHPSESSID=vjqmk2dhbr7a8q5jv16ft6h5o2", store: 'My TF1 VOD'}];
+    });
+    </script>
+</head>
+<body ng-controller="metavideoclubCtrl">
+    <h1 style="text-align: center; margin-bottom: 3rem">VOD Club</h1>
+    <input type="text" placeholder="Enter movie search"
+        style="text-align: center; display: block; margin-left: auto; margin-right: auto; width: 20rem; margin-bottom: .5rem" />
+    <button style="display: block; margin-left: auto; margin-right: auto; margin-bottom: 3rem">Search</button>
+    <table class="table" style="margin-left: auto; margin-right: auto; width: 80rem">
+        <tr>
+            <th>Title</th>
+            <th>Store</th>
+        </tr>
+        <tr ng-repeat="line in myData">
+            <td>{{line.title}}</td>
+            <td><a href="{{line.url}}" target="VOD_STORE">{{line.store}}</a></td>
+        </tr>
+    </table>
+</body>
+</html>
