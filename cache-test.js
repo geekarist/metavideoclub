@@ -32,7 +32,7 @@ describe('cache', function() {
 
         // WHEN
         var value = cache.get({n: 'v', n0: 'v0'});
-        
+
         // THEN
         expect(value).to.be('storedvalue');
         cleanup();

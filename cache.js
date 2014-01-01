@@ -22,18 +22,36 @@ exports.get = function(key) {
     return cachedValue(key);
 }
 
+function logDebug(msg) {
+    if (exports.verbose) {
+        console.log(msg);
+    }
+}
+
 exports.put = function(key, value) {
+    logDebug('## Putting value in cache...');
+    logDebug('## Key: [' + JSON.stringify(key) + ']');
+    logDebug('## Value: [' + value + ']');
+
     var storePath = cachePath('metavideoclub/store.json');
     var store;
     if (fs.existsSync(storePath)) {
+        logDebug('## Cache file does already exist, read it')
         var storeAsStr = fs.readFileSync(storePath);
         store = JSON.parse(storeAsStr);
     } else {
+        logDebug('## Cache file does not exist')
         store = {};
     }
+    logDebug('## Existing store: ' + JSON.stringify(store));
+
+    logDebug('## Updating store')
     store[JSON.stringify(key)] = value;
     if (!fs.existsSync(cachePath('metavideoclub/'))) {
+        logDebug('## Cache directory does not exist')
         fs.mkdirSync(cachePath('metavideoclub'));
     }
+
+    logDebug('## Writing new store: ' + JSON.stringify(store));
     fs.writeFileSync(cachePath('metavideoclub/store.json'), JSON.stringify(store, null, '\t'));
 }

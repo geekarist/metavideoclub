@@ -10,11 +10,13 @@ var fetchMoviePrice = function(searchTitle, store, callback) {
     request(searchUrl, function(error, response, body) {
         var result = JSON.parse(body);
         if (result.error) {
-            callback('Error while querying [' + store.name + ']: ' + JSON.stringify(result.error.errors));
+            callback(
+                'Error while querying [' + store.name + ']: ' + JSON.stringify(result.error.errors), 
+                searchTitle, store);
             return;
         }
         if (!result.items || result.items.length === 0) {
-            callback('"' + searchTitle + '" not found on ' + store.name);
+            callback('"' + searchTitle + '" not found on ' + store.name, searchTitle, store);
             return;
         }
         var movieUrl = result.items[0].link;
@@ -33,7 +35,7 @@ var fetchMoviePrice = function(searchTitle, store, callback) {
             } else {
                 foundInformation = 'No information found at ' + store.name;
             }
-            callback(foundInformation + ' (see ' + movieUrl + ')');
+            callback(foundInformation + ' (see ' + movieUrl + ')', searchTitle, store);
         });
     });
 };

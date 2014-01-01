@@ -4,7 +4,7 @@
   "description": "",
   "main": "server.js",
   "bin": {
-    "mvc": "cli.js",
+    "mvc": "launcher.js",
     "mvc-server": "server.js"
   },
   "scripts": {
@@ -26,6 +26,8 @@
     "promise": "~3.2.0"
   },
   "devDependencies": {
-    "expect.js": "~0.2.0"
+    "expect.js": "~0.2.0",
+    "injectr": "~0.4.0",
+    "sinon": "~1.7.3"
   }
 }
